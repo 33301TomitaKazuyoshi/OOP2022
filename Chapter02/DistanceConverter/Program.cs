@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace DistanceConverter {
     class Program {
 
-        
 
         //コマンドライン引数
         static void Main(string[] args) {
@@ -23,18 +22,17 @@ namespace DistanceConverter {
         //フィートからメートルへの対応表を出力
         private static void PrintFeetToMeterList(int start, int stop) {
             //インスタンス（フィートとメートルの単位変更クラス）
-            FeetConverter fc = new FeetConverter();
             for (int feet = start; feet <= stop; feet++) {
-                double meter = fc.ToMeter(feet);
+                double meter = FeetConverter.ToMeter(feet);
                 Console.WriteLine("{0} ft = {1:0.0000} m", feet, meter);
             }
         }
             //メーターからフィートへの対応表を出力
             private static void PrintMeterToFeetList(int start, int stop) {
             //インスタンス（フィートとメートルの単位変更クラス）
-            FeetConverter fc = new FeetConverter();
+           
             for (double meter = start; meter <= stop; meter++) {
-                double feet = fc.FromMeter(meter);
+                double feet = FeetConverter.FromMeter(meter);
                 Console.WriteLine("{0} m = {1:0.0000} ft", meter, feet);
             }
         }
