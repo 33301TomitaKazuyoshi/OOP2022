@@ -7,9 +7,30 @@ using System.Threading.Tasks;
 namespace Exercise {
     class Program {
         static void Main(string[] args) {
-            //Songクラスのインスタンスを複数作成し、配列songsに格納
-            List<Song> songs = new List<Song>();
+            //Songクラスのインスタンスを複数作成し、配列songsに格納            
+            var songs = new Song[] {
+                new Song("abc","tom",300),
+                new Song("def","ito",300),
+                new Song("ghi","mik",300)
+            };
 
+            /*リストを用いた書き方
+             List<Song> songs = new List<Song>();
+             
+             var song1 = new Song("a","a_man",300);
+             songs.Add(song1);
+             var song2 = new Song("b","b_men",300);
+             songs.Add(song2);
+             var song3 = new Song("c","c_gay",300);
+             songs.Add(song3);
+             
+             */
+
+            PrintSongs(songs);
+        }
+
+        private static void PrintSongs(Song[] songs) {
+           
         }
     }
 }
