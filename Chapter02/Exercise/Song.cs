@@ -16,10 +16,10 @@ namespace Exercise {
         public int Length { get; set; }
 
         //コンストラクタ
-        public Song(string Title,string ArtistName,int Length) {
-            this.Title = Title;
-            this.ArtistName = ArtistName;
-            this.Length = Length;
+        public Song(string title,string artistname,int length) {
+            Title = title;
+            ArtistName = artistname;
+            Length = length;
         }
     }
 }
