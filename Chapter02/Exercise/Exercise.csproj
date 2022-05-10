@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD2E665F-EF8B-4A09-B9D9-2F9CBF83C72F}</ProjectGuid>
+    <ProjectGuid>{25B61F19-1568-4E5E-954A-5C70D10826AF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Exercise</RootNamespace>
     <AssemblyName>Exercise</AssemblyName>
@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Song.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
