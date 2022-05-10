@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace Exercise {
     class Song {
         //歌のタイトル
-        string Title;
+        public string Title { get; set; }
 
         //アーティスト名
-        string ArtistName;
+        public string ArtistName { get; set; }
 
         //演奏時間、単位は秒
-        public int Length;
+        public int Length { get; set; }
 
         //コンストラクタ
         public Song(string Title,string ArtistName,int Length) {
