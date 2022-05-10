@@ -14,5 +14,12 @@ namespace Exercise {
 
         //演奏時間、単位は秒
         public int Length;
+
+        //コンストラクタ
+        public Song(string Title,string ArtistName,int Length) {
+            this.Title = Title;
+            this.ArtistName = ArtistName;
+            this.Length = Length;
+        }
     }
 }
