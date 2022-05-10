@@ -11,7 +11,7 @@ namespace Exercise {
             var songs = new Song[] {
                 new Song("abc","tom",300),
                 new Song("def","ito",300),
-                new Song("ghi","mik",300)
+                new Song("ghi","mij",300)
             };
 
             /*リストを用いた書き方
