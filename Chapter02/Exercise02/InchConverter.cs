@@ -10,11 +10,11 @@ namespace Exercise02 {
         //定数をratioで定義
         private const double ratio = 0.0254;  //マジックナンバー
         //public static readonly double ratio = 0.0254 ⇐外部からもアクセスさせたい場合
-        //メートルからフィートを求める(静的メソッド)
+        //メートルからインチを求める(静的メソッド)
         public static double FromMeter(double meter) {
             return meter / ratio;
         }
-        //フィートからメートルを求める(静的メソッド)
+        //インチからメートルを求める(静的メソッド)
         public static double ToMeter(int inch) {
             return inch * ratio;
         }
