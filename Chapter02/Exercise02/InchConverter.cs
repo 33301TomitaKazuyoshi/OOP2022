@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise {
+namespace Exercise02 {
     public static class InchConverter {
 
         //定数をratioで定義
@@ -20,4 +20,4 @@ namespace Exercise {
         }
     }
 }
-}
+
