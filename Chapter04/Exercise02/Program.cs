@@ -85,9 +85,31 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_6(YearMonth[] ymCollection) {
-            foreach (var ym in ymCollection.OrderByDescending(ym => ym.Year)){
+
+            //①月を昇順に　
+            foreach (var ym in ymCollection.OrderBy(ym => ym.Month)){
                 Console.WriteLine(ym);
             }
+
+            Console.WriteLine("-------------");
+
+            //②偶数年のみ昇順に　
+            foreach (var ym in ymCollection.Where(ym => ym.Year %2 == 0).OrderBy(ym => ym.Year)){
+                Console.WriteLine(ym);
+            }
+
+            Console.WriteLine("-------------");
+
+            //③閏年のみ昇順に　
+            foreach (var ym in ymCollection.Where(ym => DateTime.IsLeapYear(ym.Year))){
+                Console.WriteLine(ym);
+            }
+
+            Console.WriteLine("-------------");
+
+            //④すべての年から12月に一番近い月を
+            var data = ymCollection.Max(ym => ym.Month);
+                    Console.WriteLine(data);
         }
     }
 }
