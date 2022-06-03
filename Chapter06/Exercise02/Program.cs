@@ -43,7 +43,7 @@ namespace Exercise02 {
         }
 
         
-
+        //タイトルが「ワンダフル・C#ライフ」である書籍の価格とページ数を表示
         private static void Exercise2_1(List<Book> books) {
             var data = books.Where(b => b.Title == "ワンダフル・C#ライフ").Select(b => new { b.Price, b.Pages });
             foreach(var items in data) {
@@ -52,47 +52,46 @@ namespace Exercise02 {
             }
                 
         }
-
+        //タイトルに「C#」が含まれている書籍が何冊あるかカウント
         private static void Exercise2_2(List<Book> books) {
             var count = books.Count(b => b.Title.Contains("C#"));
             Console.WriteLine(count);
         }
-
+        //タイトルに「C#」が含まれている書籍の平均ページ数を表示
         private static void Exercise2_3(List<Book> books) {
             var average = books.Where(n => n.Title.Contains("C#")).Average(n => n.Pages);
             Console.WriteLine(average);
         }
-
+        //価格が4000円以上の本で最初に見つかった書籍のタイトルを表示
         private static void Exercise2_4(List<Book> books) {
             var firstFind = books.FirstOrDefault(n => n.Price >= 4000);
             if (firstFind != null) {
                 Console.WriteLine(firstFind.Title);
             }
         }
-
+        //価格が４０００円未満の本の中で最大ページ数を表示
         private static void Exercise2_5(List<Book> books) {
             var maxPages = books.Where(n => n.Price < 4000).Max(n => n.Pages);
                 Console.WriteLine(maxPages);
         }
-
+        //４００ページ以上の書籍を価格の高い順に表示
         private static void Exercise2_6(List<Book> books) {
             var priceDescending = books.Where(n => n.Pages >= 400).OrderByDescending(n => n.Price);
             foreach (var n in priceDescending) {
                 Console.WriteLine(n.Title + ":" + n.Price);
             }
         }
-
+        //タイトルに「C#」が含まれていてかつ500ページ以下の本を見つけ、本のタイトルを表示
         private static void Exercise2_7(List<Book> books) {
             var book = books.Where(n => n.Title.Contains("C#") && n.Pages <= 500);
             foreach (var items in book) {
                 Console.WriteLine(items.Title);
             }
         }
-
+        //「n冊目：～」という表記で本のタイトルを表示
         private static void Exercise2_8(List<Book> books) {
-            int count = 1 ;
-            foreach (var n in books) {
-                Console.WriteLine(count++ + "冊目：" + n.Title);
+            foreach (var n in books.Select((title, index) => new { title.Title, index })) {
+                Console.WriteLine($"{n.index + 1}冊目:{n.Title}");
             }
         }
 
