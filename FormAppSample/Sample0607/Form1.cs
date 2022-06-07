@@ -30,5 +30,14 @@ namespace Sample0607 {
                 MessageBox.Show("0で割り算できません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Form1_Load_1(object sender, EventArgs e) {
+
+        }
+
+        private void btRandom_Click(object sender, EventArgs e) {
+            var rand = new Random();
+            Number.Value = rand.Next(minValue: (int)min.Value,maxValue:(int)max.Value);
+        }
     }
 }
