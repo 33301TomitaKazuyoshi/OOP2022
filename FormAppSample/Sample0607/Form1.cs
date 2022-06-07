@@ -37,7 +37,7 @@ namespace Sample0607 {
 
         private void btRandom_Click(object sender, EventArgs e) {
             var rand = new Random();
-            Number.Value = rand.Next(minValue: (int)min.Value,maxValue:(int)max.Value);
+            Number.Value = rand.Next(minValue: (int)min.Value,maxValue:(int)max.Value + 1);
         }
     }
 }
