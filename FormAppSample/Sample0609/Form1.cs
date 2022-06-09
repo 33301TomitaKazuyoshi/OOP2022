@@ -8,22 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sample0609 {
+namespace AddresBook {
     public partial class Form1 : Form {
+
+        BindingList<Person> listPerson = new BindingList<Person>();
         public Form1() {
             InitializeComponent();
+            dgvPersons.DataSource = listPerson;
         }
 
-        private void label4_Click(object sender, EventArgs e) {
+        private void btAddPerson_Click(object sender, EventArgs e) {
+            Person newPerson = new Person {
+                Name = tbName.Text,
+                MailAddress = tbMailAddress.Text,
+                Address = tbAddress.Text,
+                Company = tbCompany.Text,
+                Picture = pbPicture.Image,
+            };
 
+            listPerson.Add(newPerson);
         }
 
-        private void button2_Click(object sender, EventArgs e) {
-
+        private void btPictureOpen_Click(object sender, EventArgs e) {
+            if (ofdFileOpenDialog.ShowDialog() == DialogResult.OK) {
+                pbPicture.Image = Image.FromFile(ofdFileOpenDialog.FileName);
+            }
         }
 
-        private void checkBox4_CheckedChanged(object sender, EventArgs e) {
-
+        private void btPictureClear_Click(object sender, EventArgs e) {
+            pbPicture.Image = null;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Sample0609 {
+namespace AddresBook {
     static class Program {
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
