@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace NumberGame {
     public partial class Form1 : Form {
-        private decimal randomNum = new Random().Next(minValue: 1, maxValue: 5);
+        private decimal randomNum = new Random().Next(minValue: 1, maxValue: 51);
 
         public Form1() {
             InitializeComponent();
@@ -22,15 +22,24 @@ namespace NumberGame {
         private void input_Click(object sender, EventArgs e) {
 
             if (randomNum == Number.Value) {
-                labelAns.Text = "正解！";
-                ssMessage.Text = "〇";
+
+                tbJudge.Text = "〇";
+                ssMessage.Text = "正解！";
+
             } else if (randomNum > Number.Value) {
-                labelAns.Text = "";
+
+                tbJudge.Text = "×";
                 ssMessage.Text = Number.Value + "より大きいです。";
+
             } else {
-                labelAns.Text = "";
+                tbJudge.Text = "×";
                 ssMessage.Text = Number.Value + "より小さいです。";
             }
         }
+
+        private void nudMaxValue_ValueChanged(object sender, EventArgs e) {
+            randomNum = new Random().Next(minValue: 1, maxValue: (int)nudMaxValue.Value);
+        }
+
     }
 }
