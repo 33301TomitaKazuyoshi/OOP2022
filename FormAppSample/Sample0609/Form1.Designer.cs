@@ -101,10 +101,13 @@ namespace AddresBook {
             // 
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersons.Location = new System.Drawing.Point(12, 339);
+            this.dgvPersons.MultiSelect = false;
             this.dgvPersons.Name = "dgvPersons";
             this.dgvPersons.RowTemplate.Height = 21;
+            this.dgvPersons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersons.Size = new System.Drawing.Size(754, 181);
             this.dgvPersons.TabIndex = 1;
+            this.dgvPersons.Click += new System.EventHandler(this.dgvPersons_Click);
             // 
             // tbName
             // 
@@ -148,6 +151,7 @@ namespace AddresBook {
             this.cbFamily.TabIndex = 3;
             this.cbFamily.Text = "家族";
             this.cbFamily.UseVisualStyleBackColor = true;
+            this.cbFamily.CheckedChanged += new System.EventHandler(this.cbFamily_CheckedChanged);
             // 
             // cbFriend
             // 
