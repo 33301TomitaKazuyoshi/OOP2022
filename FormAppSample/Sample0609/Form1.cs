@@ -28,6 +28,8 @@ namespace AddresBook {
             };
 
             listPerson.Add(newPerson);
+            btUpdate.Enabled = true;
+            btDelete.Enabled = true;
         }
 
         //チェックボックスにセットされている値をリストとして取り出す
@@ -56,6 +58,7 @@ namespace AddresBook {
 
         private void btPictureClear_Click(object sender, EventArgs e) {
             pbPicture.Image = null;
+            btPictureClear.Enabled = false;
         }
 
         private void cbFamily_CheckedChanged(object sender, EventArgs e) {
@@ -64,50 +67,67 @@ namespace AddresBook {
 
         //データグリッドビューをクリックしたときのイベントハンドラ
         private void dgvPersons_Click(object sender, EventArgs e) {
+
+            if (dgvPersons.CurrentRow == null) return;
+
             int index = dgvPersons.CurrentRow.Index;
+
             tbName.Text = listPerson[index].Name;
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
             tbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
+
+            groupCheckBoxAllClear();
+
+
             foreach (var group in listPerson[index].listGroup) {
                 switch (group) {
                     case Person.GroupType.家族:
-                        cbFamily.CheckState = CheckState.Checked;
-                        cbFriend.CheckState = CheckState.Unchecked;
-                        cbWork.CheckState = CheckState.Unchecked;
-                        cbOther.CheckState = CheckState.Unchecked;
+                        cbFamily.Checked = true;
                         break;
                     case Person.GroupType.友人:
-                        cbFamily.CheckState = CheckState.Unchecked;
-                        cbFriend.CheckState = CheckState.Checked;
-                        cbWork.CheckState = CheckState.Unchecked;
-                        cbOther.CheckState = CheckState.Unchecked;
+                        cbFriend.Checked = true;
                         break;
                     case Person.GroupType.仕事:
-                        cbFamily.CheckState = CheckState.Unchecked;
-                        cbFriend.CheckState = CheckState.Unchecked;
-                        cbWork.CheckState = CheckState.Checked;
-                        cbOther.CheckState = CheckState.Unchecked;
+                        cbWork.Checked = true;
                         break;
-
                     case Person.GroupType.その他:
-                        cbFamily.CheckState = CheckState.Unchecked;
-                        cbFriend.CheckState = CheckState.Unchecked;
-                        cbWork.CheckState = CheckState.Unchecked;
-                        cbOther.CheckState = CheckState.Checked;
+                        cbOther.Checked = true;
                         break;
                 }
             }
-            /*
-            foreach (DataGridViewRow index in dgvPersons.SelectedRows) {
-                tbName.Text = listPerson[index.Index].Name;
-                tbMailAddress.Text = listPerson[index.Index].MailAddress;
-                tbAddress.Text = listPerson[index.Index].Address;
-                tbCompany.Text = listPerson[index.Index].Company;
-                pbPicture.Image = listPerson[index.Index].Picture;
+            
             }
-            */
+        private void groupCheckBoxAllClear() {
+            cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
+        }
+
+        private void btUpdate_Click(object sender, EventArgs e) {
+            listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
+            listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Company = tbCompany.Text;
+            listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
+            listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+            dgvPersons.Refresh(); //データグリッドビュー更新
+
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+            if (dgvPersons.CurrentRow == null) {
+                btUpdate.Enabled = false;
+                btDelete.Enabled = false;
+            }
+        }
+
+        private void dgvPersons_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+            if (listPerson[dgvPersons.CurrentRow.Index].Picture != null) {
+                btPictureClear.Enabled = true;
+            } else {
+                btPictureClear.Enabled = false;
+            }
         }
     }
 }
