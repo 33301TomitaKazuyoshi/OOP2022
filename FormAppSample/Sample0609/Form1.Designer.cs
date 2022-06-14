@@ -102,6 +102,7 @@ namespace AddresBook {
             // dgvPersons
             // 
             this.dgvPersons.AllowUserToAddRows = false;
+            this.dgvPersons.AllowUserToDeleteRows = false;
             this.dgvPersons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPersons.Location = new System.Drawing.Point(12, 339);
             this.dgvPersons.MultiSelect = false;
@@ -121,6 +122,7 @@ namespace AddresBook {
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(383, 31);
             this.tbName.TabIndex = 2;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // tbMailAddress
             // 
@@ -190,6 +192,7 @@ namespace AddresBook {
             // 
             // btAddPerson
             // 
+            this.btAddPerson.Enabled = false;
             this.btAddPerson.Font = new System.Drawing.Font("MS UI Gothic", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.btAddPerson.Location = new System.Drawing.Point(514, 273);
             this.btAddPerson.Name = "btAddPerson";

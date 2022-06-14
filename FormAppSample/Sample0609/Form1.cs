@@ -18,18 +18,27 @@ namespace AddresBook {
         }
 
         private void btAddPerson_Click(object sender, EventArgs e) {
-            Person newPerson = new Person {
-                Name = tbName.Text,
-                MailAddress = tbMailAddress.Text,
-                Address = tbAddress.Text,
-                Company = tbCompany.Text,
-                Picture = pbPicture.Image,
-                listGroup = GetCheckBoxGroup(),
-            };
+            if (tbName.Text == null) {
+                MessageBox.Show("0で割り算できません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else { 
 
-            listPerson.Add(newPerson);
-            btUpdate.Enabled = true;
-            btDelete.Enabled = true;
+           
+                Person newPerson = new Person {
+
+                    Name = tbName.Text,
+                    MailAddress = tbMailAddress.Text,
+                    Address = tbAddress.Text,
+                    Company = tbCompany.Text,
+                    Picture = pbPicture.Image,
+                    listGroup = GetCheckBoxGroup(),
+                };
+
+                listPerson.Add(newPerson);
+                if (listPerson.Count() != 0) {
+                    btUpdate.Enabled = true;
+                    btDelete.Enabled = true;
+                }
+            }
         }
 
         //チェックボックスにセットされている値をリストとして取り出す
@@ -116,7 +125,7 @@ namespace AddresBook {
 
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
-            if (dgvPersons.CurrentRow == null) {
+            if (listPerson.Count() == 0) {
                 btUpdate.Enabled = false;
                 btDelete.Enabled = false;
             }
@@ -127,6 +136,17 @@ namespace AddresBook {
                 btPictureClear.Enabled = true;
             } else {
                 btPictureClear.Enabled = false;
+            }
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e) {
+            if (tbName.Text.Length == 0) {
+                btAddPerson.Enabled = false;
+                btUpdate.Enabled = false;
+            }
+
+            if (tbName.Text.Length != 0) {
+                btAddPerson.Enabled = true;
             }
         }
     }
