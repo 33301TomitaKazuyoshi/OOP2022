@@ -37,16 +37,12 @@ namespace Test02 {
         //　　　　出力結果【618】
         private static void Exercise01(List<int> numbers) {
                 Console.WriteLine(numbers.Sum());
-            
-
-
         }
 
         //問題２　偶数の最大値を表示
         //　　　　出力結果【94】
         private static void Exercise02(List<int> numbers) {
             Console.WriteLine(numbers.Where(n => n % 2 == 0).Max());
-
         }
         //問題３　昇順に並べて表示（遅延実行とする）
         //　　　　出力結果【12 14 17 20 31 35 40 48 53 76 87 91 94】
@@ -54,8 +50,6 @@ namespace Test02 {
             foreach (var num in numbers.OrderBy(n => n)) {
                 Console.Write("{0} ", num);
             }
-
-
         }
 
         //問題４　10以上50以下の数字のみを表示（即時実行でも可とする）
@@ -64,8 +58,6 @@ namespace Test02 {
             foreach (var num in numbers.Where(n => n >= 10 && n <= 50)) {
                 Console.Write("{0} ", num );
             }
-
-
         }
     }
 }
