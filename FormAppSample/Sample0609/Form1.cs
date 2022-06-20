@@ -18,8 +18,9 @@ namespace AddresBook {
         }
 
         private void btAddPerson_Click(object sender, EventArgs e) {
-            if (tbName.Text == null) {
-                MessageBox.Show("0で割り算できません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (String.IsNullOrWhiteSpace(tbName.Text)) {
+                MessageBox.Show("氏名が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             } else { 
 
            
@@ -28,7 +29,7 @@ namespace AddresBook {
                     Name = tbName.Text,
                     MailAddress = tbMailAddress.Text,
                     Address = tbAddress.Text,
-                    Company = tbCompany.Text,
+                    Company = cbCompany.Text,
                     Picture = pbPicture.Image,
                     listGroup = GetCheckBoxGroup(),
                 };
@@ -37,6 +38,11 @@ namespace AddresBook {
                 if (listPerson.Count() != 0) {
                     btUpdate.Enabled = true;
                     btDelete.Enabled = true;
+                }
+
+                //コンボボックスに会社名を登録する（重複なし）
+                if (!cbCompany.Items.Contains(cbCompany.Text)) {
+                    cbCompany.Items.Add(cbCompany.Text); 
                 }
             }
         }
@@ -84,7 +90,7 @@ namespace AddresBook {
             tbName.Text = listPerson[index].Name;
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
-            tbCompany.Text = listPerson[index].Company;
+            cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
             groupCheckBoxAllClear();
@@ -116,11 +122,13 @@ namespace AddresBook {
             listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
             listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
-            listPerson[dgvPersons.CurrentRow.Index].Company = tbCompany.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
             dgvPersons.Refresh(); //データグリッドビュー更新
-
+            if (!cbCompany.Items.Contains(cbCompany.Text)) {
+                cbCompany.Items.Add(cbCompany.Text);
+            }
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
@@ -148,6 +156,14 @@ namespace AddresBook {
             if (tbName.Text.Length != 0) {
                 btAddPerson.Enabled = true;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+
+        }
+
+        private void cbCompany_Click(object sender, EventArgs e) {
+            //cbCompany.Text = (string)cbCompany.SelectedItem;
         }
     }
 }
