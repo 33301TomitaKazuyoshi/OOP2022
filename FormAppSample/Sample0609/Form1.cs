@@ -48,7 +48,7 @@ namespace AddresBook {
         //コンボボックスに会社名を登録する（重複なし）
         private void setCbCompany(string company) {
             if (!cbCompany.Items.Contains(company)) {
-                cbCompany.Items.Add(cbCompany.Text);
+                cbCompany.Items.Add(company);
             }
         }
 
@@ -124,6 +124,10 @@ namespace AddresBook {
         }
 
         private void btUpdate_Click(object sender, EventArgs e) {
+            if (tbName.Text == "") {
+                MessageBox.Show("氏名が入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
             listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
@@ -134,14 +138,12 @@ namespace AddresBook {
             if (!cbCompany.Items.Contains(cbCompany.Text)) {
                 cbCompany.Items.Add(cbCompany.Text);
             }
+            
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
-            if (listPerson.Count() == 0) {
-                btUpdate.Enabled = false;
-                btDelete.Enabled = false;
-            }
+            EnabledCheck(); //マスク処理呼び出し
         }
 
         private void dgvPersons_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -164,8 +166,11 @@ namespace AddresBook {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            btDelete.Enabled = false; //削除ボタン
-            btUpdate.Enabled = false; //更新ボタン
+            EnabledCheck();
+        }
+
+        private void EnabledCheck() {
+            btDelete.Enabled = btUpdate.Enabled = listPerson.Count() > 0 ? true : false;
         }
 
         private void btSave_Click(object sender, EventArgs e) {
@@ -199,10 +204,12 @@ namespace AddresBook {
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
+                cbCompany.Items.Clear();
                 foreach (var item in listPerson.Select(p => p.Company)) {
                     setCbCompany(item); //存在する会社を登録
                 }
             }
+            EnabledCheck();//マスク処理の呼び出し
         }
     }
 }
