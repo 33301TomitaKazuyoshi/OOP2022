@@ -17,7 +17,22 @@ namespace AddresBook {
         [System.ComponentModel.DisplayName("会社")]
         public string Company { get; set; }
         [System.ComponentModel.DisplayName("グループ")]
+        public string Group {
+            get {
+                string groups = "";
+                foreach (GroupType group in listGroup) {
+                    groups += "[" + group + "]";
+                }
+                return groups;
+            }
+        }
+        [System.ComponentModel.DisplayName("種別番号")]
+        public List<KindNumberType> KindNumber { get; set; }
+        [System.ComponentModel.DisplayName("電話番号")]
+        public string TelNumber { get; set; }
         public List<GroupType> listGroup { get; set; }
+        [System.ComponentModel.DisplayName("登録日")]
+        public DateTime Registration { get; set; }
         [System.ComponentModel.DisplayName("画像")]
         public Image Picture { get; set; }
 
@@ -26,6 +41,10 @@ namespace AddresBook {
             友人,
             仕事,
             その他
+        }
+        public enum KindNumberType {
+            自宅,
+            携帯
         }
     }
 }

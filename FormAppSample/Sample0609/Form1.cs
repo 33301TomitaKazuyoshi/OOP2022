@@ -34,15 +34,16 @@ namespace AddresBook {
                     Company = cbCompany.Text,
                     Picture = pbPicture.Image,
                     listGroup = GetCheckBoxGroup(),
-                };
+                    KindNumber = GetRadioButtonGroup(),
+                    TelNumber = tbTelNumber.Text,
+                    Registration = DateTime.Today,
+            };
 
                 listPerson.Add(newPerson);
-                if (listPerson.Count() != 0) {
-                    btUpdate.Enabled = true;
-                    btDelete.Enabled = true;
-                }
+                EnabledCheck();
 
                 setCbCompany(cbCompany.Text);
+                dtpRegistDate.Value = DateTime.Today;
             }
         }
         //コンボボックスに会社名を登録する（重複なし）
@@ -51,9 +52,19 @@ namespace AddresBook {
                 cbCompany.Items.Add(company);
             }
         }
-
-        //チェックボックスにセットされている値をリストとして取り出す
-        private List<Person.GroupType> GetCheckBoxGroup() {
+        //ラジオボタンにセットされている値をリストとして取り出す
+        private List<Person.KindNumberType> GetRadioButtonGroup() {
+            var listGroup = new List<Person.KindNumberType>();
+            if (rbHome.Checked) {
+                listGroup.Add(Person.KindNumberType.自宅);
+            }
+            if (rbMobile.Checked) {
+                listGroup.Add(Person.KindNumberType.携帯);
+            }
+            return listGroup;
+        }
+            //チェックボックスにセットされている値をリストとして取り出す
+            private List<Person.GroupType> GetCheckBoxGroup() {
             var listGroup = new List<Person.GroupType>();
             if (cbFamily.Checked) {
                 listGroup.Add(Person.GroupType.家族);
@@ -96,6 +107,9 @@ namespace AddresBook {
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
             cbCompany.Text = listPerson[index].Company;
+            
+            tbTelNumber.Text = listPerson[index].TelNumber;
+            dtpRegistDate.Value = listPerson[index].Registration.Year > 1900 ? listPerson[index].Registration : DateTime.Today; ;
             pbPicture.Image = listPerson[index].Picture;
 
             groupCheckBoxAllClear();
@@ -133,12 +147,13 @@ namespace AddresBook {
             listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
+            listPerson[dgvPersons.CurrentRow.Index].Registration = DateTime.Today;
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
             dgvPersons.Refresh(); //データグリッドビュー更新
             if (!cbCompany.Items.Contains(cbCompany.Text)) {
                 cbCompany.Items.Add(cbCompany.Text);
             }
-            
+            dtpRegistDate.Value = DateTime.Now;
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
@@ -152,6 +167,7 @@ namespace AddresBook {
             } else {
                 btPictureClear.Enabled = false;
             }
+            dtpRegistDate.Value = listPerson[dgvPersons.CurrentRow.Index].Registration;
         }
 
         private void tbName_TextChanged(object sender, EventArgs e) {
