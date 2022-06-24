@@ -16,28 +16,38 @@ namespace AddresBook {
         public string Address { get; set; }
         [System.ComponentModel.DisplayName("会社")]
         public string Company { get; set; }
+        public List<GroupType> cbListGroup { get; set; }
         [System.ComponentModel.DisplayName("グループ")]
         public string Group {
             get {
                 string groups = "";
-                foreach (GroupType group in listGroup) {
+                foreach (GroupType group in cbListGroup) {
                     groups += "[" + group + "]";
                 }
                 return groups;
             }
         }
+        public List<KindNumberType> rbListGroup { get; set; }
         [System.ComponentModel.DisplayName("種別番号")]
-        public List<KindNumberType> KindNumber { get; set; }
+        public  string Groups {
+            get {
+                string groups = "";
+                foreach (KindNumberType group in rbListGroup) {
+                    groups += "[" + group + "]";
+                }
+                return groups;
+            }
+        }
         [System.ComponentModel.DisplayName("電話番号")]
         public string TelNumber { get; set; }
-        public List<GroupType> listGroup { get; set; }
+        
         [System.ComponentModel.DisplayName("登録日")]
         public DateTime Registration { get; set; }
         [System.ComponentModel.DisplayName("画像")]
         public Image Picture { get; set; }
 
         public enum GroupType { 
-            家族,
+            GAY,
             友人,
             仕事,
             その他

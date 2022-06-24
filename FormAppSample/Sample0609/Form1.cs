@@ -33,8 +33,8 @@ namespace AddresBook {
                     Address = tbAddress.Text,
                     Company = cbCompany.Text,
                     Picture = pbPicture.Image,
-                    listGroup = GetCheckBoxGroup(),
-                    KindNumber = GetRadioButtonGroup(),
+                    cbListGroup = GetCheckBoxGroup(),
+                    rbListGroup = GetRadioButtonGroup(),
                     TelNumber = tbTelNumber.Text,
                     Registration = DateTime.Today,
             };
@@ -67,7 +67,7 @@ namespace AddresBook {
             private List<Person.GroupType> GetCheckBoxGroup() {
             var listGroup = new List<Person.GroupType>();
             if (cbFamily.Checked) {
-                listGroup.Add(Person.GroupType.家族);
+                listGroup.Add(Person.GroupType.GAY);
             }
             if (cbFriend.Checked) {
                 listGroup.Add(Person.GroupType.友人);
@@ -107,7 +107,6 @@ namespace AddresBook {
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
             cbCompany.Text = listPerson[index].Company;
-            
             tbTelNumber.Text = listPerson[index].TelNumber;
             dtpRegistDate.Value = listPerson[index].Registration.Year > 1900 ? listPerson[index].Registration : DateTime.Today; ;
             pbPicture.Image = listPerson[index].Picture;
@@ -115,9 +114,9 @@ namespace AddresBook {
             groupCheckBoxAllClear();
 
 
-            foreach (var group in listPerson[index].listGroup) {
+            foreach (var group in listPerson[index].cbListGroup) {
                 switch (group) {
-                    case Person.GroupType.家族:
+                    case Person.GroupType.GAY:
                         cbFamily.Checked = true;
                         break;
                     case Person.GroupType.友人:
@@ -131,8 +130,19 @@ namespace AddresBook {
                         break;
                 }
             }
-            
+            foreach (var group in listPerson[index].rbListGroup) {
+                switch (group) {
+                    case Person.KindNumberType.携帯:
+                        rbMobile.Checked = true;
+                        break;
+                    case Person.KindNumberType.自宅:
+                        rbHome.Checked = true;
+                        break;
+                }
             }
+
+
+        }
         private void groupCheckBoxAllClear() {
             cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
         }
@@ -146,7 +156,9 @@ namespace AddresBook {
             listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
-            listPerson[dgvPersons.CurrentRow.Index].listGroup = GetCheckBoxGroup();
+            listPerson[dgvPersons.CurrentRow.Index].cbListGroup = GetCheckBoxGroup();
+            listPerson[dgvPersons.CurrentRow.Index].rbListGroup = GetRadioButtonGroup();
+            listPerson[dgvPersons.CurrentRow.Index].TelNumber = tbTelNumber.Text;
             listPerson[dgvPersons.CurrentRow.Index].Registration = DateTime.Today;
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
             dgvPersons.Refresh(); //データグリッドビュー更新
