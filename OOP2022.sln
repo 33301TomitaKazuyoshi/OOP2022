@@ -66,6 +66,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RssReader", "Chapter11\RssReader\RssReader.csproj", "{DED4AD5A-0666-4CBC-A562-CC971822CB01}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter11", "Chapter11", "{307858E7-E420-4056-A556-E3C018C58C61}"
+	ProjectSection(SolutionItems) = preProject
+		Chapter11\XmlSample\bin\Debug\novelists.xml = Chapter11\XmlSample\bin\Debug\novelists.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

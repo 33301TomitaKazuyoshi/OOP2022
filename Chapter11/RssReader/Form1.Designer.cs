@@ -32,7 +32,10 @@ namespace RssReader
             this.cbRssUrl = new System.Windows.Forms.ComboBox();
             this.btRssGet = new System.Windows.Forms.Button();
             this.lbRssTitle = new System.Windows.Forms.ListBox();
-            this.wbBrowser = new System.Windows.Forms.WebBrowser();
+            this.btForward = new System.Windows.Forms.Button();
+            this.btBack = new System.Windows.Forms.Button();
+            this.wvBrouser = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
+            ((System.ComponentModel.ISupportInitialize)(this.wvBrouser)).BeginInit();
             this.SuspendLayout();
             // 
             // cbRssUrl
@@ -42,9 +45,11 @@ namespace RssReader
             this.cbRssUrl.Name = "cbRssUrl";
             this.cbRssUrl.Size = new System.Drawing.Size(822, 20);
             this.cbRssUrl.TabIndex = 0;
+            this.cbRssUrl.TextChanged += new System.EventHandler(this.cbRssUrl_TextChanged);
             // 
             // btRssGet
             // 
+            this.btRssGet.Enabled = false;
             this.btRssGet.Location = new System.Drawing.Point(840, 10);
             this.btRssGet.Name = "btRssGet";
             this.btRssGet.Size = new System.Drawing.Size(75, 23);
@@ -63,27 +68,53 @@ namespace RssReader
             this.lbRssTitle.TabIndex = 2;
             this.lbRssTitle.Click += new System.EventHandler(this.lbRssTitle_Click);
             // 
-            // wbBrowser
+            // btForward
             // 
-            this.wbBrowser.Location = new System.Drawing.Point(251, 44);
-            this.wbBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbBrowser.Name = "wbBrowser";
-            this.wbBrowser.ScriptErrorsSuppressed = true;
-            this.wbBrowser.Size = new System.Drawing.Size(663, 700);
-            this.wbBrowser.TabIndex = 3;
-            this.wbBrowser.Url = new System.Uri("", System.UriKind.Relative);
+            this.btForward.Enabled = false;
+            this.btForward.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btForward.Location = new System.Drawing.Point(980, 6);
+            this.btForward.Name = "btForward";
+            this.btForward.Size = new System.Drawing.Size(50, 34);
+            this.btForward.TabIndex = 4;
+            this.btForward.Text = "▶";
+            this.btForward.UseVisualStyleBackColor = true;
+            this.btForward.Click += new System.EventHandler(this.btForward_Click);
+            // 
+            // btBack
+            // 
+            this.btBack.Enabled = false;
+            this.btBack.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.btBack.Location = new System.Drawing.Point(924, 5);
+            this.btBack.Name = "btBack";
+            this.btBack.Size = new System.Drawing.Size(50, 34);
+            this.btBack.TabIndex = 4;
+            this.btBack.Text = "◀";
+            this.btBack.UseVisualStyleBackColor = true;
+            this.btBack.Click += new System.EventHandler(this.btBack_Click);
+            // 
+            // wvBrouser
+            // 
+            this.wvBrouser.Location = new System.Drawing.Point(261, 44);
+            this.wvBrouser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wvBrouser.Name = "wvBrouser";
+            this.wvBrouser.Size = new System.Drawing.Size(770, 697);
+            this.wvBrouser.TabIndex = 5;
+            this.wvBrouser.DOMContentLoaded += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlDOMContentLoadedEventArgs>(this.wvBrouser_DOMContentLoaded);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 766);
-            this.Controls.Add(this.wbBrowser);
+            this.ClientSize = new System.Drawing.Size(1043, 753);
+            this.Controls.Add(this.wvBrouser);
+            this.Controls.Add(this.btBack);
+            this.Controls.Add(this.btForward);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btRssGet);
             this.Controls.Add(this.cbRssUrl);
             this.Name = "Form1";
             this.Text = "RSSReader";
+            ((System.ComponentModel.ISupportInitialize)(this.wvBrouser)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,7 +124,9 @@ namespace RssReader
         private System.Windows.Forms.ComboBox cbRssUrl;
         private System.Windows.Forms.Button btRssGet;
         private System.Windows.Forms.ListBox lbRssTitle;
-        private System.Windows.Forms.WebBrowser wbBrowser;
+        private System.Windows.Forms.Button btForward;
+        private System.Windows.Forms.Button btBack;
+        private Microsoft.Toolkit.Forms.UI.Controls.WebView wvBrouser;
     }
 }
 
