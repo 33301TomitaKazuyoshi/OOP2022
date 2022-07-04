@@ -60,6 +60,8 @@ namespace RssReader
             // 
             // lbRssTitle
             // 
+            this.lbRssTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lbRssTitle.FormattingEnabled = true;
             this.lbRssTitle.ItemHeight = 12;
             this.lbRssTitle.Location = new System.Drawing.Point(12, 44);
@@ -94,12 +96,15 @@ namespace RssReader
             // 
             // wvBrouser
             // 
-            this.wvBrouser.Location = new System.Drawing.Point(261, 44);
+            this.wvBrouser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.wvBrouser.Location = new System.Drawing.Point(261, 47);
             this.wvBrouser.MinimumSize = new System.Drawing.Size(20, 20);
             this.wvBrouser.Name = "wvBrouser";
             this.wvBrouser.Size = new System.Drawing.Size(770, 697);
             this.wvBrouser.TabIndex = 5;
-            this.wvBrouser.DOMContentLoaded += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlDOMContentLoadedEventArgs>(this.wvBrouser_DOMContentLoaded);
+            this.wvBrouser.NavigationCompleted += new System.EventHandler<Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs>(this.wvBrouser_NavigationCompleted);
             // 
             // Form1
             // 
