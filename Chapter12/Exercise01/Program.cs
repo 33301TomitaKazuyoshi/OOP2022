@@ -39,15 +39,15 @@ namespace Exercise01 {
 
     class Program {
         static void Main(string[] args) {
-            //Exercise1_1("employee.xml");
+            Exercise1_1("employee.xml");
 
-            // これは確認用
-            //Console.WriteLine(File.ReadAllText("employee.xml"));
-            //Console.WriteLine();
+            //これは確認用
+            Console.WriteLine(File.ReadAllText("employee.xml"));
+            Console.WriteLine();
 
-            //Exercise1_2("employees.xml");
-            //Exercise1_3("employees.xml");
-            //Console.WriteLine();
+            Exercise1_2("employees.xml");
+            Exercise1_3("employees.xml");
+            Console.WriteLine();
 
             Exercise1_4("employees.json");
 
