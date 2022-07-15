@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,8 +20,8 @@ namespace CarReportSystem {
         }
 
         private void btAdd_Click(object sender, EventArgs e) {
-            if (String.IsNullOrWhiteSpace(tbReport.Text)) {
-                MessageBox.Show("レポートが入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (String.IsNullOrWhiteSpace(tbReport.Text) && String.IsNullOrWhiteSpace(cbAuther.Text) && String.IsNullOrWhiteSpace(cbCarName.Text)) {
+                MessageBox.Show("未入力の項目があります。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             } else {
 
@@ -44,10 +46,10 @@ namespace CarReportSystem {
 
 
         }
-        //コンボボックスに車名を登録する（重複なし）
+        //コンボボックスに記録者名を登録する（重複なし）
         private void setCbAuther(string Name) {
             if (!cbAuther.Items.Contains(Name)) {
-                cbCarName.Items.Add(Name);
+                cbAuther.Items.Add(Name);
             }
         }
         //コンボボックスに車名を登録する（重複なし）
@@ -86,7 +88,6 @@ namespace CarReportSystem {
 
         private void btPictureClear_Click(object sender, EventArgs e) {
             pbPicture.Image = null;
-            btPictureClear.Enabled = false;
         }
 
         private void btPictureOpen_Click(object sender, EventArgs e) {
@@ -140,8 +141,8 @@ namespace CarReportSystem {
         }
 
         private void btFix_Click(object sender, EventArgs e) {
-            if (tbReport.Text == "") {
-                MessageBox.Show("レポートが入力されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (String.IsNullOrWhiteSpace(tbReport.Text) && String.IsNullOrWhiteSpace(cbAuther.Text) && String.IsNullOrWhiteSpace(cbCarName.Text)) {
+                MessageBox.Show("未入力の項目があります。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             listCarReport[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
@@ -154,6 +155,52 @@ namespace CarReportSystem {
             setCbAuther(cbAuther.Text);
             setCbCarName(cbCarName.Text);
             dtpDate.Value = DateTime.Now;
+        }
+
+        private void btOpen_Click(object sender, EventArgs e) {
+            if (ofdFileOpenDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式で逆シリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(ofdFileOpenDialog.FileName, FileMode.Open, FileAccess.Read)) {
+                        //逆シリアル化して読み込む
+                        listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvCarReport.DataSource = null;
+                        dgvCarReport.DataSource = listCarReport;
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+                cbAuther.Items.Clear();
+                cbCarName.Items.Clear();
+                foreach (var item in listCarReport.Select(p => p.Auther)) {
+                    setCbAuther(item); //存在する記録者名を登録
+                }
+                foreach (var item in listCarReport.Select(p => p.CarName)) {
+                    setCbCarName(item); //存在する車名を登録
+                }
+            }
+            EnabledCheck();//マスク処理の呼び出し
+        }
+
+        private void btSave_Click(object sender, EventArgs e) {
+            if (sfdSaveFileDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+
+                    using (FileStream fs = File.Open(sfdSaveFileDialog.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReport);
+                    }
+
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btColorSetting_Click(object sender, EventArgs e) {
+            
         }
     }
 }
