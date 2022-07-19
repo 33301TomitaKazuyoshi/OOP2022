@@ -55,6 +55,7 @@ namespace CarReportSystem {
             this.btColorSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.btExit = new System.Windows.Forms.ToolStripMenuItem();
             this.cdColor = new System.Windows.Forms.ColorDialog();
+            this.btModeSelect = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -65,13 +66,13 @@ namespace CarReportSystem {
             this.dgvCarReport.AllowUserToAddRows = false;
             this.dgvCarReport.AllowUserToDeleteRows = false;
             this.dgvCarReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCarReport.Location = new System.Drawing.Point(0, 345);
+            this.dgvCarReport.Location = new System.Drawing.Point(28, 345);
             this.dgvCarReport.MultiSelect = false;
             this.dgvCarReport.Name = "dgvCarReport";
             this.dgvCarReport.ReadOnly = true;
             this.dgvCarReport.RowTemplate.Height = 21;
             this.dgvCarReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCarReport.Size = new System.Drawing.Size(679, 244);
+            this.dgvCarReport.Size = new System.Drawing.Size(644, 244);
             this.dgvCarReport.TabIndex = 2;
             this.dgvCarReport.Click += new System.EventHandler(this.dgvCarReport_Click);
             // 
@@ -310,36 +311,47 @@ namespace CarReportSystem {
             // btOpen
             // 
             this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(180, 22);
+            this.btOpen.Size = new System.Drawing.Size(110, 22);
             this.btOpen.Text = "開く...";
             this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // btSave
             // 
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(180, 22);
+            this.btSave.Size = new System.Drawing.Size(110, 22);
             this.btSave.Text = "保存...";
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btColorSetting
             // 
             this.btColorSetting.Name = "btColorSetting";
-            this.btColorSetting.Size = new System.Drawing.Size(180, 22);
+            this.btColorSetting.Size = new System.Drawing.Size(110, 22);
             this.btColorSetting.Text = "色設定";
             this.btColorSetting.Click += new System.EventHandler(this.btColorSetting_Click);
             // 
             // btExit
             // 
             this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(180, 22);
+            this.btExit.Size = new System.Drawing.Size(110, 22);
             this.btExit.Text = "終了";
             this.btExit.Click += new System.EventHandler(this.btExit_Click);
+            // 
+            // btModeSelect
+            // 
+            this.btModeSelect.Location = new System.Drawing.Point(637, 31);
+            this.btModeSelect.Name = "btModeSelect";
+            this.btModeSelect.Size = new System.Drawing.Size(35, 23);
+            this.btModeSelect.TabIndex = 20;
+            this.btModeSelect.Text = "★";
+            this.btModeSelect.UseVisualStyleBackColor = true;
+            this.btModeSelect.Click += new System.EventHandler(this.btModeSelect_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 601);
+            this.Controls.Add(this.btModeSelect);
             this.Controls.Add(this.tbReport);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbAuther);
@@ -366,6 +378,8 @@ namespace CarReportSystem {
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "試乗レポート管理システム";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbPicture)).EndInit();
             this.menuStrip1.ResumeLayout(false);
@@ -408,6 +422,7 @@ namespace CarReportSystem {
         private System.Windows.Forms.ToolStripMenuItem btExit;
         private System.Windows.Forms.ToolStripMenuItem btColorSetting;
         private System.Windows.Forms.ColorDialog cdColor;
+        private System.Windows.Forms.Button btModeSelect;
     }
 }
 
