@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace AddresBook {
     public partial class Form1 : Form {
-
+        
         BindingList<Person> listPerson = new BindingList<Person>();
         public Form1() {
             InitializeComponent();

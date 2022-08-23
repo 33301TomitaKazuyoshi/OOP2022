@@ -15,10 +15,12 @@ using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
-
+        //設定情報保存用オブジェクト
         Settings settings = new Settings {};
+        //カーレポート管理用リスト
         BindingList<CarReport> listCarReport = new BindingList<CarReport>();
 
+        int mode = 0;
         public Form1() {
             InitializeComponent();
             dgvCarReport.DataSource = listCarReport;
@@ -183,6 +185,7 @@ namespace CarReportSystem {
                 foreach (var item in listCarReport.Select(p => p.CarName)) {
                     setCbCarName(item); //存在する車名を登録
                 }
+                
             }
             EnabledCheck();//マスク処理の呼び出し
         }
@@ -192,11 +195,10 @@ namespace CarReportSystem {
                 try {
                     //バイナリ形式でシリアル化
                     var bf = new BinaryFormatter();
-
                     using (FileStream fs = File.Open(sfdSaveFileDialog.FileName, FileMode.Create)) {
                         bf.Serialize(fs, listCarReport);
                     }
-
+                    
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
@@ -206,15 +208,13 @@ namespace CarReportSystem {
         private void btColorSetting_Click(object sender, EventArgs e) {
             if (cdColor.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColor.Color;
-                settings.MainFormColor = cdColor.Color;
+                settings.MainFormColor = BackColor.ToArgb();  //設定オブジェクトにセット
             }
             
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
-            var settings = new Settings {
-                MainFormColor = cdColor.Color,
-            };
+            
             using (var color = XmlWriter.Create("settings.xml")) {
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(color,settings);
@@ -222,15 +222,21 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            using (XmlReader reader = XmlReader.Create("settings.xml")) {
+            //設定ファイルを逆シリアル化（P307）して背景の色を設定
+            using (var reader = XmlReader.Create("settings.xml")) {
                 var serializer = new XmlSerializer(typeof(Settings));
-                var color = serializer.Deserialize(reader) as Settings;
-
+                settings = serializer.Deserialize(reader) as Settings;
+                SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                BackColor = Color.FromArgb(settings.MainFormColor);
             }
+            
+
+            EnabledCheck(); //マスク処理呼び出し
         }
 
         private void btModeSelect_Click(object sender, EventArgs e) {
-            
+            pbPicture.SizeMode = (PictureBoxSizeMode)mode;
+            mode = mode < 4 ? ++mode : 0;
         }
     }
 }
