@@ -223,15 +223,17 @@ namespace CarReportSystem {
 
         private void Form1_Load(object sender, EventArgs e) {
             //設定ファイルを逆シリアル化（P307）して背景の色を設定
-            using (var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                settings = serializer.Deserialize(reader) as Settings;
-                SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-                BackColor = Color.FromArgb(settings.MainFormColor);
+            try {
+                using (var reader = XmlReader.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    settings = serializer.Deserialize(reader) as Settings;
+                    SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+                    BackColor = Color.FromArgb(settings.MainFormColor);
+                }
+            } catch (Exception) { } 
+            finally {
+                EnabledCheck(); //マスク処理呼び出し
             }
-            
-
-            EnabledCheck(); //マスク処理呼び出し
         }
 
         private void btModeSelect_Click(object sender, EventArgs e) {
