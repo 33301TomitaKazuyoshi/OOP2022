@@ -10,8 +10,8 @@ namespace SingletonSample
     {
         static void Main(string[] args)
         {
-            Singleton obj1 = new Singleton();
-            Singleton obj2 = new Singleton();
+            Singleton obj1 = Singleton.getInstance();
+            Singleton obj2 = Singleton.getInstance();
             if (obj1 == obj2)
             {
                 Console.WriteLine("obj1とobj2は同じインスタンスです。");
