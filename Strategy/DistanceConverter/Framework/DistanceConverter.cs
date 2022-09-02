@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DistanceConverter {
-    public class DistanceConverter {
+namespace DistanceConverter .Framework{
+    public class DistanceConverter{
         public ConverterBase From { get; private set; }
         public ConverterBase To { get; private set;}
 

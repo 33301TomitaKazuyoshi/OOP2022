@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DistanceConverter.Framework;
 
-namespace DistanceConverter {
+
+namespace DistanceConverter{
     public abstract class ConverterBase {
 
         public abstract bool IsMyUnit(string name);

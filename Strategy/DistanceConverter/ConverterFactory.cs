@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DistanceConverter.Framework;
 
 namespace DistanceConverter {
     static class ConverterFactory {
@@ -13,6 +14,8 @@ namespace DistanceConverter {
             new FeetConverter(),
             new YardConverter(),
             new InchConverter(),
+            new MileConverter(),
+            new KiloMeterConverter(),
          };
 
         public static ConverterBase GetInstance(string name) {
