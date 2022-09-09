@@ -311,28 +311,28 @@ namespace CarReportSystem {
             // btOpen
             // 
             this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(110, 22);
+            this.btOpen.Size = new System.Drawing.Size(180, 22);
             this.btOpen.Text = "開く...";
             this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // btSave
             // 
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(110, 22);
+            this.btSave.Size = new System.Drawing.Size(180, 22);
             this.btSave.Text = "保存...";
             this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btColorSetting
             // 
             this.btColorSetting.Name = "btColorSetting";
-            this.btColorSetting.Size = new System.Drawing.Size(110, 22);
+            this.btColorSetting.Size = new System.Drawing.Size(180, 22);
             this.btColorSetting.Text = "色設定";
             this.btColorSetting.Click += new System.EventHandler(this.btColorSetting_Click);
             // 
             // btExit
             // 
             this.btExit.Name = "btExit";
-            this.btExit.Size = new System.Drawing.Size(110, 22);
+            this.btExit.Size = new System.Drawing.Size(180, 22);
             this.btExit.Text = "終了";
             this.btExit.Click += new System.EventHandler(this.btExit_Click);
             // 
