@@ -20,10 +20,16 @@ namespace CarReportSystem {
         //カーレポート管理用リスト
         BindingList<CarReport> listCarReport = new BindingList<CarReport>();
 
+        private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e) {
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202228DataSet);
+
+        }
+
         int mode = 0;
         public Form1() {
             InitializeComponent();
-            dgvCarReport.DataSource = listCarReport;
         }
         //追加
         private void btAdd_Click(object sender, EventArgs e) {
@@ -33,17 +39,20 @@ namespace CarReportSystem {
             } else {
 
 
-                CarReport newPersons = new CarReport {
+                DataRow newRow = infosys202228DataSet.CarReport.NewRow();
+                newRow[1] = dtpDate.Value;
+                newRow[2] = cbAuther.Text;
+                newRow[3] = GetRadioButtonGroup();
+                newRow[4] = cbCarName.Text;
+                newRow[5] = tbReport.Text;
+                newRow[6] = pbPicture.Image;
 
-                    Date = dtpDate.Value,
-                    Auther = cbAuther.Text,
-                    Maker = GetRadioButtonGroup(),
-                    CarName = cbCarName.Text,
-                    Report = tbReport.Text,
-                    Picture = pbPicture.Image,
-                };
+                //データセットへ新しいレコードを追加
+                infosys202228DataSet.CarReport.Rows.Add(newRow);
 
-                listCarReport.Add(newPersons);
+                //データベース更新
+                this.carReportTableAdapter.Update(this.infosys202228DataSet.CarReport);
+
                 EnabledCheck();
 
                 setCbAuther(cbAuther.Text);
@@ -52,7 +61,7 @@ namespace CarReportSystem {
             }
 
 
-        }
+            }
         //コンボボックスに記録者名を登録する（重複なし）
         private void setCbAuther(string Name) {
             if (!cbAuther.Items.Contains(Name)) {
@@ -104,9 +113,31 @@ namespace CarReportSystem {
         }
         //データグリッドビュー
         private void dgvCarReport_Click(object sender, EventArgs e) {
-            if (dgvCarReport.CurrentRow == null) return;
+            if (dgvCarReporta.CurrentRow == null) return;
 
-            int index = dgvCarReport.CurrentRow.Index;
+
+            //データグリッドビューの選択レコードを各テキストボックスへ設定
+            dtpDate.Value = (DateTime)dgvCarReporta.CurrentRow.Cells[1].Value;
+            cbAuther.Text = dgvCarReporta.CurrentRow.Cells[2].Value.ToString();
+            //GetRadioButtonGroup() = dgvCarReport.CurrentRow.Cells[3].Value;
+            cbCarName.Text = dgvCarReporta.CurrentRow.Cells[4].Value.ToString();
+            tbReport.Text = dgvCarReporta.CurrentRow.Cells[5].Value.ToString();
+            if (!(dgvCarReporta.CurrentRow.Cells[6].Value is DBNull)) {
+                pbPicture.Image = ByteArrayToImage((byte[])dgvCarReporta.CurrentRow.Cells[6].Value);
+            } else {
+                pbPicture.Image = null;
+            }
+
+
+
+
+
+
+
+
+
+
+            int index = dgvCarReporta.CurrentRow.Index;
 
             dtpDate.Value = listCarReport[index].Date;
             cbAuther.Text = listCarReport[index].Auther;
@@ -142,7 +173,7 @@ namespace CarReportSystem {
         }
         //削除
         private void btDelete_Click(object sender, EventArgs e) {
-            listCarReport.RemoveAt(dgvCarReport.CurrentRow.Index);
+            listCarReport.RemoveAt(dgvCarReporta.CurrentRow.Index);
             EnabledCheck(); //マスク処理呼び出し
         }
         //修正
@@ -151,16 +182,19 @@ namespace CarReportSystem {
                 MessageBox.Show("未入力の項目があります。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            listCarReport[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
-            listCarReport[dgvCarReport.CurrentRow.Index].Auther = cbAuther.Text;
-            listCarReport[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonGroup();
-            listCarReport[dgvCarReport.CurrentRow.Index].CarName = cbCarName.Text;
-            listCarReport[dgvCarReport.CurrentRow.Index].Report = tbReport.Text;
-            listCarReport[dgvCarReport.CurrentRow.Index].Picture = pbPicture.Image;
-            dgvCarReport.Refresh();//データグリッドビュー修正
+            dgvCarReporta.CurrentRow.Cells[1].Value = dtpDate.Value;
+            dgvCarReporta.CurrentRow.Cells[2].Value = cbAuther.Text;
+            dgvCarReporta.CurrentRow.Cells[3].Value = GetRadioButtonGroup();
+            dgvCarReporta.CurrentRow.Cells[4].Value = cbCarName.Text;
+            dgvCarReporta.CurrentRow.Cells[5].Value = tbReport.Text;
+            dgvCarReporta.CurrentRow.Cells[6].Value = ImageToByteArray(pbPicture.Image);
+            dgvCarReporta.Refresh();//データグリッドビュー修正
             setCbAuther(cbAuther.Text);
             setCbCarName(cbCarName.Text);
             dtpDate.Value = DateTime.Now;
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202228DataSet);
         }
         //ファイルを開く
         private void btOpen_Click(object sender, EventArgs e) {
@@ -171,8 +205,8 @@ namespace CarReportSystem {
                     using (FileStream fs = File.Open(ofdFileOpenDialog.FileName, FileMode.Open, FileAccess.Read)) {
                         //逆シリアル化して読み込む
                         listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
-                        dgvCarReport.DataSource = null;
-                        dgvCarReport.DataSource = listCarReport;
+                        dgvCarReporta.DataSource = null;
+                        dgvCarReporta.DataSource = listCarReport;
                     }
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
@@ -222,6 +256,8 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202228DataSet.CarReport' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportTableAdapter.Fill(this.infosys202228DataSet.CarReport);
             //設定ファイルを逆シリアル化（P307）して背景の色を設定
             try {
                 using (var reader = XmlReader.Create("settings.xml")) {
@@ -240,5 +276,34 @@ namespace CarReportSystem {
             pbPicture.SizeMode = (PictureBoxSizeMode)mode;
             mode = mode < 4 ? ++mode : 0;
         }
+
+        //データベース接続
+        private void btConnect_Click(object sender, EventArgs e) {
+            this.carReportTableAdapter.Fill(this.infosys202228DataSet.CarReport);
+        }
+
+        // バイト配列をImageオブジェクトに変換
+        public static Image ByteArrayToImage(byte[] b) {
+            try {
+                ImageConverter imgconv = new ImageConverter();
+                Image img = (Image)imgconv.ConvertFrom(b);
+                return img;
+            } catch {
+                return null;
+            }
+        }
+
+        // Imageオブジェクトをバイト配列に変換
+        public static byte[] ImageToByteArray(Image img) {
+            ImageConverter imgconv = new ImageConverter();
+            byte[] b = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
+            return b;
+        }
+
+        //エラー回避
+        private void dgvAddressTable_DataError(object sender, DataGridViewDataErrorEventArgs e) {
+        }
+
+
     }
 }
