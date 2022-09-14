@@ -133,6 +133,7 @@ namespace AddressBook {
             Application.Exit();
         }
 
+
         private void btVersion_Click(object sender, EventArgs e) {
             new Version().ShowDialog();
         }
