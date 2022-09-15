@@ -40,13 +40,12 @@ namespace CarReportSystem {
 
 
                 DataRow newRow = infosys202228DataSet.CarReport.NewRow();
-                newRow[0] = dgvCarReport.Rows.Count + 1;
                 newRow[1] = dtpDate.Value;
                 newRow[2] = cbAuther.Text;
                 newRow[3] = GetRadioButtonGroup();
                 newRow[4] = cbCarName.Text;
                 newRow[5] = tbReport.Text;
-                newRow[6] = pbPicture.Image;
+                newRow[6] = ImageToByteArray(pbPicture.Image);
 
                 //データセットへ新しいレコードを追加
                 
@@ -88,13 +87,13 @@ namespace CarReportSystem {
                 return "ホンダ";
             }
             if (rbSubaru.Checked) {
-                return "トヨタ";
+                return "スバル";
             }
             if (rbForeignCar.Checked) {
-                return "トヨタ";
+                return "外国車";
             }
             if (rbOther.Checked) {
-                return "トヨタ";
+                return "その他";
             }
             return "";
         }
@@ -117,8 +116,11 @@ namespace CarReportSystem {
         //削除
         private void btDelete_Click(object sender, EventArgs e) {
             //データセットのレコードを削除
-            infosys202228DataSet.CarReport.Rows.RemoveAt(dgvCarReport.CurrentRow.Index);
-            //データベース更新
+            dgvCarReport.Rows.RemoveAt(dgvCarReport.CurrentRow.Index);
+
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            //this.tableAdapterManager.UpdateAll(this.infosys202228DataSet);
             this.carReportTableAdapter.Update(this.infosys202228DataSet.CarReport);
         }
         //修正
@@ -137,6 +139,7 @@ namespace CarReportSystem {
             setCbAuther(cbAuther.Text);
             setCbCarName(cbCarName.Text);
             dtpDate.Value = DateTime.Now;
+           
             this.Validate();
             this.carReportBindingSource.EndEdit();
             this.tableAdapterManager.UpdateAll(this.infosys202228DataSet);
@@ -211,7 +214,8 @@ namespace CarReportSystem {
         }
 
         //エラー回避
-        private void dgvAddressTable_DataError(object sender, DataGridViewDataErrorEventArgs e) {
+        private void dgvCarReport_DataError(object sender, DataGridViewDataErrorEventArgs e) {
+
         }
 
         //バージョン情報
@@ -224,7 +228,9 @@ namespace CarReportSystem {
 
 
             //データグリッドビューの選択レコードを各テキストボックスへ設定
-            dtpDate.Value = (DateTime)dgvCarReport.CurrentRow.Cells[1].Value;
+            try {
+                dtpDate.Value = (DateTime)dgvCarReport.CurrentRow.Cells[1].Value;
+            } catch { }
             cbAuther.Text = dgvCarReport.CurrentRow.Cells[2].Value.ToString();
             switch (dgvCarReport.CurrentRow.Cells[3].Value) {
                 case "トヨタ":
@@ -256,6 +262,15 @@ namespace CarReportSystem {
 
 
                 
+        }
+
+        private void btSarch_Click(object sender, EventArgs e) {
+            carReportTableAdapter.FillByName(infosys202228DataSet.CarReport,tbSarch.Text);
+        }
+
+        private void btSarchClear_Click(object sender, EventArgs e) {
+            tbSarch.Text = null;
+            carReportTableAdapter.Fill(infosys202228DataSet.CarReport);
         }
     }
 }
