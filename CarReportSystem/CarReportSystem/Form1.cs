@@ -160,7 +160,7 @@ namespace CarReportSystem {
         //フォームを閉じたときの処理
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             
-            using (var color = XmlWriter.Create("settings.xml")) {
+            using (var color = XmlWriter.Create("settings.xml")) { 
                 var serializer = new XmlSerializer(settings.GetType());
                 serializer.Serialize(color,settings);
             }
