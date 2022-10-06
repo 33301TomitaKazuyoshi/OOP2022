@@ -78,7 +78,7 @@ namespace Chapter15 {
                 Console.WriteLine($"{book.PublishedYear},{book.Title},{book.Category}");
             }
 
-            Console.WriteLine($"合計額：{selected.Sum(x=>x.Price)}");
+            Console.WriteLine($"合計額：{selected.Sum(b=>b.Price)}");
         }
     }
 }
