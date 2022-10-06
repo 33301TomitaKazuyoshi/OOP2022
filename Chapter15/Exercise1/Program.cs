@@ -31,23 +31,17 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_3() {
-            var groups = Library.Books
-                .GroupBy(b => b.PublishedYear)
-                .OrderBy(g => g.Key);
-            var count = Library.Books
-                .GroupBy(b => b.PublishedYear)
-                .Count();
+            var query = Library.Books
+                .GroupBy(b => b.PublishedYear);
 
-            foreach (var g in groups) {
-                Console.Write($"{g.Key}年 ");
-                Console.WriteLine($"{g.Count()}冊");
+            foreach(var item in query.OrderBy(b=>b.Key)) {
+                Console.WriteLine("{0}年 {1}冊 " ,item.Key,item.Count());
             }
         }
 
         private static void Exercise1_4() {
             var selected = Library.Books
-                .OrderByDescending(b => b.PublishedYear)
-                .ThenByDescending(b => b.Price).Join(Library.Categories,  //結合する2番目のシーケンス
+                .Join(Library.Categories,  //結合する2番目のシーケンス
                       book => book.CategoryId,  //対象シーケンスの結合キー
                       category => category.Id,  //２番目のシーケンスの結合キー
                       (book, category) => new {
@@ -55,16 +49,17 @@ namespace Exercise1 {
                           Category = category.Name,
                           PublishedYear = book.PublishedYear,
                           Price = book.Price
-                      }
-                );
+                      })
+                .OrderByDescending(b => b.PublishedYear)
+                .ThenByDescending(b => b.Price);
             foreach (var book in selected) {
-                Console.WriteLine($"{book.PublishedYear}年　{book.Title} ({book.Category})");
+                Console.WriteLine($"{book.PublishedYear}年 {book.Price}円 {book.Title} ({book.Category})");
             }
 
         }
 
         private static void Exercise1_5() {
-            var selected = Library.Books
+            var query = Library.Books
                 .Where(b => b.PublishedYear == 2016)
                 .Join(Library.Categories,  //結合する2番目のシーケンス
                       book => book.CategoryId,  //対象シーケンスの結合キー
@@ -72,21 +67,46 @@ namespace Exercise1 {
                       (book, category) => category.Name)
                 .Distinct()
                       ;
-            foreach (var book in selected) {
+            foreach (var book in query) {
                 Console.WriteLine(book);
             }
         }
 
         private static void Exercise1_6() {
+            
         }
 
         private static void Exercise1_7() {
+            var groups = Library.Books
+               .Where(b=>b.CategoryId == 1)
+               .GroupBy(b => b.PublishedYear)
+               .OrderBy(g => g.Key);
 
+            foreach (var g in groups) {
+                Console.WriteLine($"#{g.Key}年");
+                foreach (var book in g) {
+                    var category = Library.Categories.Where(b => b.Id == book.CategoryId).First();
+                    Console.WriteLine($" {book.Title}");
+
+                }
+            }
         }
 
     
 
         private static void Exercise1_8() {
+            var groups = Library.Categories
+                         .GroupJoin(Library.Books,
+                         c => c.Id,
+                         b => b.CategoryId,
+                         (c, books) => new {
+                             Category = c.Name,
+                             Count = books.Count()
+                         });
+            foreach (var obj in groups.Where(c=>c.Count >= 4)) {
+
+                Console.WriteLine(obj.Category);
+            }
         }
     }
 }
