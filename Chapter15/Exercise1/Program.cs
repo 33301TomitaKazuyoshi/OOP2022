@@ -40,22 +40,21 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_4() {
-            var selected = Library.Books
+            var query = Library.Books
                 .Join(Library.Categories,  //結合する2番目のシーケンス
                       book => book.CategoryId,  //対象シーケンスの結合キー
                       category => category.Id,  //２番目のシーケンスの結合キー
                       (book, category) => new {
-                          Title = book.Title,
-                          Category = category.Name,
-                          PublishedYear = book.PublishedYear,
-                          Price = book.Price
+                          book.Title,
+                          CategoryName = category.Name,
+                          book.PublishedYear,
+                          book.Price
                       })
                 .OrderByDescending(b => b.PublishedYear)
                 .ThenByDescending(b => b.Price);
-            foreach (var book in selected) {
-                Console.WriteLine($"{book.PublishedYear}年 {book.Price}円 {book.Title} ({book.Category})");
+            foreach (var item in query) {
+                Console.WriteLine("{0}年 {1}円 {2} ({3})",item.PublishedYear,item.Price,item.Title,item.CategoryName);
             }
-
         }
 
         private static void Exercise1_5() {
@@ -73,7 +72,25 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_6() {
-            
+            var query = Library.Books
+                .Join(Library.Categories,
+                        book => book.CategoryId,
+                        category => category.Id,
+                        (book, category) => new {
+                           book.Title,
+                           book.PublishedYear,
+                           book.Price,
+                           CategoryName = category.Name
+                 })
+                 .GroupBy(x => x.CategoryName)
+                 .OrderBy(x => x.Key);
+
+            foreach (var group in query) {
+                Console.WriteLine("#{0}",group.Key);
+                foreach (var item in group) {
+                    Console.WriteLine(" {0}",item.Title);
+                }
+            }
         }
 
         private static void Exercise1_7() {
