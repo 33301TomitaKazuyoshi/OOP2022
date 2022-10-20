@@ -20,14 +20,41 @@ namespace SampleApplication {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+            seasonComboBox.SelectedIndex = 0;
         }
 
-        private void OkButton_Click(object sender, RoutedEventArgs e) {
-            MessageBox.Show("ボタンが押されました。");
+        private int getSeasonIndex() {
+            var today = DateTime.Now;
+            int ret = ((int)today.Month) / 3 - 1;
+            if (ret < 0) ret = 3;
+            return ret;
         }
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e) {
 
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e) {
+            checkBoxTextBlock.Text = "チェック済み";
+        }
+
+        private void checkBox_Unchecked(object sender, RoutedEventArgs e) {
+            checkBoxTextBlock.Text = "未チェック";
+        }
+
+        private void redRadioButton_Checked(object sender, RoutedEventArgs e) {
+            colorTextBox.Text = "赤";
+        }
+
+        private void yellowRadioButton_Checked(object sender, RoutedEventArgs e) {
+            colorTextBox.Text = "黄";
+        }
+
+        private void blueRadioButton_Checked(object sender, RoutedEventArgs e) {
+            colorTextBox.Text = "青";
+        }
+
+        private void seasonComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            seasonComboBox.Text = (string)((ComboBoxItem)seasonComboBox.SelectedItem).Content;
+            seasonTextBlock.Text = seasonComboBox.Text;
         }
     }
 }
