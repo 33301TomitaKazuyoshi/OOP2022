@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="200" Width="550">
+        Title="MainWindow" Height="280" Width="750">
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -23,10 +24,11 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -40,27 +42,27 @@
                    Text="R" />
             <Slider  Grid.Row="1" Grid.Column="1" 
                  x:Name="RedSlider" 
-                 Maximum="255" ValueChanged="ColorSlider_ValueChanged"/>
-            <TextBox Grid.Row="1" Grid.Column="3" 
-                 Text="{Binding ElementName=RedSlider,Path=Value ,UpdateSourceTrigger=PropertyChanged}"/>
+                 Maximum="255" Minimum="0" ValueChanged="ColorSlider_ValueChanged" TickFrequency="50" TickPlacement="BottomRight" />
+            <TextBox Grid.Row="1" Grid.Column="3" Height="20"
+                 Text="{Binding ElementName=RedSlider,Path=Value ,StringFormat={}{0:N0}}"/>
 
             <TextBlock Grid.Column="0" Grid.Row="3" HorizontalAlignment="Center"
                    Text="G" />
             <Slider Grid.Row="3" Grid.Column="1" 
                 x:Name="GreenSlider" 
-                Maximum="255" ValueChanged="ColorSlider_ValueChanged"/>
-            <TextBox Grid.Row="3" Grid.Column="2" 
-                 Text="{Binding ElementName=GreenSlider,Path=Value ,UpdateSourceTrigger=PropertyChanged}"/>
+                Maximum="255" Minimum="0"  ValueChanged="ColorSlider_ValueChanged" TickFrequency="50" TickPlacement="BottomRight"/>
+            <TextBox Grid.Row="3" Grid.Column="2" Height="20"
+                 Text="{Binding ElementName=GreenSlider,Path=Value ,StringFormat={}{0:N0}}"/>
 
             <TextBlock Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center"
                    Text="B" />
             <Slider Grid.Row="5" Grid.Column="1" 
                 x:Name="BlueSlider" 
-                Maximum="255" ValueChanged="ColorSlider_ValueChanged"/>
-            <TextBox Grid.Row="5" Grid.Column="2" 
-                 Text="{Binding ElementName=BlueSlider,Path=Value ,UpdateSourceTrigger=PropertyChanged}"/>
+                Maximum="255" Minimum="0" ValueChanged="ColorSlider_ValueChanged" TickFrequency="50" TickPlacement="BottomRight"/>
+            <TextBox Grid.Row="5" Grid.Column="2" Height="20"
+                 Text="{Binding ElementName=BlueSlider,Path=Value ,StringFormat={}{0:N0}}"/>
 
-            <ComboBox Grid.Row="6" Grid.Column ="1" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Height="24" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="155" >
+            <ComboBox x:Name="colorBox" Grid.Row="7" Grid.Column ="1" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Height="24" VerticalAlignment="Top" VerticalContentAlignment="Center" HorizontalAlignment="Left" Width="155" SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -75,6 +77,13 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </Grid>
-
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="colorButton" Grid.Row="0" Content="STOCK" Height="20" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="colorButton_Click"/>
+                <ListBox x:Name="stockList" Grid.Row="1"/>
+        </Grid>
     </Grid>
 </Window>
