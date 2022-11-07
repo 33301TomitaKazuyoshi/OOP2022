@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -24,7 +25,9 @@ namespace ColorChecker {
             DataContext = GetColorList();
         }
 
-        public List<MyColor> stockMyColor;
+        List<MyColor> stockMyColor = new List<MyColor>();
+
+        MyColor myColor = new MyColor();
 
         private MyColor[] GetColorList() {
             return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
@@ -42,6 +45,12 @@ namespace ColorChecker {
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var myColor = (MyColor)((ComboBox)sender).SelectedItem;
             var color = myColor.Color;
+            var name = myColor.Name;
+
+            stockMyColor.Add(new MyColor() {
+                Name = name,
+                Color = color,
+            });
 
             colorLabel.Background = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
             RedSlider.Value = color.R;
@@ -50,12 +59,33 @@ namespace ColorChecker {
         }
 
         private void colorButton_Click(object sender, RoutedEventArgs e) {
-            //stockMyColor.Add();
-            foreach (var n in stockMyColor) {
-                stockList.Items.Add($"R：{n.ToString()} G：{n.ToString()} B：{n.ToString()}");
-            }
+            MyColor myColor = new MyColor();
+            var r = byte.Parse(rValue.Text);
+            var g = byte.Parse(gValue.Text);
+            var b = byte.Parse(bValue.Text);
+
+            myColor.Color = Color.FromRgb(r, g, b);
+
+            var colorName = ((IEnumerable<MyColor>)DataContext)
+                .Where(c => c.Color.R == myColor.Color.R &&
+                            c.Color.G == myColor.Color.G && 
+                            c.Color.B == myColor.Color.B)
+                            .FirstOrDefault();
+
+            stockList.Items.Add(colorName?.Name ?? $"R：{RedSlider.Value} G：{GreenSlider.Value} B：{BlueSlider.Value}");
+            stockMyColor.Add(myColor);
+        }
+
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            int index = stockList.SelectedIndex;
+            RedSlider.Value = stockMyColor[index].Color.R;
+            GreenSlider.Value = stockMyColor[index].Color.G;
+            BlueSlider.Value = stockMyColor[index].Color.B;
         }
     }
+
+
+
     public class MyColor {
         public Color Color { get; set; }
         public string Name { get; set; }
