@@ -44,10 +44,10 @@ namespace ColorChecker {
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var myColor = (MyColor)((ComboBox)sender).SelectedItem;
             var color = myColor.Color;
-            colorLabel.Background = new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B));
             RedSlider.Value = color.R;
             GreenSlider.Value = color.G;
             BlueSlider.Value = color.B;
+            colorLabel.Background = new SolidColorBrush(Color.FromRgb(byte.Parse(rValue.Text), byte.Parse(gValue.Text), byte.Parse(bValue.Text)));
         }
 
         private void colorButton_Click(object sender, RoutedEventArgs e) {
@@ -88,7 +88,8 @@ namespace ColorChecker {
 
         private void deleteButton_Click(object sender, RoutedEventArgs e) {
             try {
-                int index = stockList.SelectedIndex;
+                var index = stockList.SelectedIndex;
+                stockMyColor.RemoveAt(index);
                 stockList.Items.RemoveAt(index);
             } catch (Exception) { }
         }
