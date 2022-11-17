@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -15,22 +16,55 @@ namespace WeatherApp {
         public Form1() {
             InitializeComponent();
         }
-
-        private void btWeatherGet_Click(object sender, EventArgs e) {
-            var wc = new WebClient() { 
-                Encoding = Encoding.UTF8
-            };
-            var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/{tbAreaCode.Text}.json");
-            var json = JsonConvert.DeserializeObject<Rootobject>(dString);
-            tbPublishingOffice.Text = json.publishingOffice;
-            tbReportDatetime.Text = json.reportDatetime.ToString();
-            tbHeadlineText.Text = json.headlineText.ToString();
-            tbWeatherInfo.Text = json.text;
+        public int areaCode;
+        private void Form1_Load(object sender, EventArgs e) {
             
         }
 
-        private void tbAreaCode_TextChanged(object sender, EventArgs e) {
-           // var areacode = new AreaCode("areacode.csv");
+        private void cbTohoku_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void cbKanto_SelectedIndexChanged(object sender, EventArgs e) {
+            switch (cbKanto.Text) {
+                case "群馬県":
+                    areaCode = 100000;
+                    break;
+                case "栃木県":
+                    areaCode = 090000;
+                    break;
+                case "茨城県":
+                    areaCode = 080000;
+                    break;
+                case "埼玉県":
+                    areaCode = 110000;
+                    break;
+                case "東京都":
+                    areaCode = 130000;
+                    break;
+                case "神奈川県":
+                    areaCode = 140000;
+                    break;
+                case "千葉県":
+                    areaCode = 100000;
+                    break;
+            }
+        }
+
+        private void cbTyubu_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void cbKinki_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void cbChugokuShikoku_SelectedIndexChanged(object sender, EventArgs e) {
+
+        }
+
+        private void cbKyushu_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }
