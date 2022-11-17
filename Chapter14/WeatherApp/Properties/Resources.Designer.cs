@@ -83,29 +83,9 @@ namespace WeatherApp.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
-        internal static System.Drawing.Bitmap Kanto {
+        internal static System.Drawing.Bitmap Japan2 {
             get {
-                object obj = ResourceManager.GetObject("Kanto", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Bitmap Tohoku {
-            get {
-                object obj = ResourceManager.GetObject("Tohoku", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
-        /// </summary>
-        internal static System.Drawing.Bitmap Tyubu {
-            get {
-                object obj = ResourceManager.GetObject("Tyubu", resourceCulture);
+                object obj = ResourceManager.GetObject("Japan2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
