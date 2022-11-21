@@ -39,7 +39,7 @@ namespace WeatherApp {
             this.lbHokkaido = new System.Windows.Forms.Label();
             this.cbHokkaido = new System.Windows.Forms.ComboBox();
             this.lbOkinawa = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbOkinawa = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,12 +49,14 @@ namespace WeatherApp {
             this.lbPubli = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tbWeatherInfo = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pbWeatherImage = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.lbWeather = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbTempMax = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbTempMin = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbWeatherImage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -157,8 +159,7 @@ namespace WeatherApp {
             "熊本県",
             "大分県",
             "宮崎県",
-            "鹿児島県",
-            "奄美地方"});
+            "鹿児島県"});
             this.cbKyushu.Location = new System.Drawing.Point(34, 415);
             this.cbKyushu.Name = "cbKyushu";
             this.cbKyushu.Size = new System.Drawing.Size(93, 20);
@@ -241,8 +242,6 @@ namespace WeatherApp {
             this.cbHokkaido.Items.AddRange(new object[] {
             "宗谷地方",
             "上川・留萌地方",
-            "綱走・北見・紋別地方",
-            "十勝地方",
             "釧路・根室地方",
             "胆振・日高地方",
             "石狩・空知・後志地方",
@@ -263,18 +262,19 @@ namespace WeatherApp {
             this.lbOkinawa.TabIndex = 11;
             this.lbOkinawa.Text = "沖縄";
             // 
-            // comboBox1
+            // cbOkinawa
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.cbOkinawa.FormattingEnabled = true;
+            this.cbOkinawa.Items.AddRange(new object[] {
             "沖縄本島地方",
             "大東島地方",
             "宮古島地方",
             "八重山地方"});
-            this.comboBox1.Location = new System.Drawing.Point(400, 434);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(108, 20);
-            this.comboBox1.TabIndex = 10;
+            this.cbOkinawa.Location = new System.Drawing.Point(400, 434);
+            this.cbOkinawa.Name = "cbOkinawa";
+            this.cbOkinawa.Size = new System.Drawing.Size(108, 20);
+            this.cbOkinawa.TabIndex = 10;
+            this.cbOkinawa.SelectedIndexChanged += new System.EventHandler(this.cbOkinawa_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -290,7 +290,7 @@ namespace WeatherApp {
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(881, 463);
+            this.label2.Location = new System.Drawing.Point(631, 493);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 19);
             this.label2.TabIndex = 11;
@@ -330,7 +330,7 @@ namespace WeatherApp {
             // 
             this.lbReportDatetime.AutoSize = true;
             this.lbReportDatetime.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbReportDatetime.Location = new System.Drawing.Point(987, 463);
+            this.lbReportDatetime.Location = new System.Drawing.Point(737, 493);
             this.lbReportDatetime.Name = "lbReportDatetime";
             this.lbReportDatetime.Size = new System.Drawing.Size(20, 19);
             this.lbReportDatetime.TabIndex = 11;
@@ -355,7 +355,6 @@ namespace WeatherApp {
             this.label4.Size = new System.Drawing.Size(49, 19);
             this.label4.TabIndex = 11;
             this.label4.Text = "概況";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // tbWeatherInfo
             // 
@@ -365,30 +364,10 @@ namespace WeatherApp {
             this.tbWeatherInfo.Size = new System.Drawing.Size(485, 140);
             this.tbWeatherInfo.TabIndex = 13;
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.SystemColors.Info;
-            this.pictureBox3.Location = new System.Drawing.Point(951, 104);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(121, 111);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 12;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackColor = System.Drawing.SystemColors.Info;
-            this.pictureBox2.Location = new System.Drawing.Point(792, 104);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(121, 111);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 12;
-            this.pictureBox2.TabStop = false;
-            // 
             // pbWeatherImage
             // 
             this.pbWeatherImage.BackColor = System.Drawing.SystemColors.Info;
-            this.pbWeatherImage.Location = new System.Drawing.Point(637, 104);
+            this.pbWeatherImage.Location = new System.Drawing.Point(702, 90);
             this.pbWeatherImage.Name = "pbWeatherImage";
             this.pbWeatherImage.Size = new System.Drawing.Size(121, 111);
             this.pbWeatherImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -406,21 +385,86 @@ namespace WeatherApp {
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             // 
+            // lbWeather
+            // 
+            this.lbWeather.AutoSize = true;
+            this.lbWeather.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbWeather.Location = new System.Drawing.Point(750, 227);
+            this.lbWeather.Name = "lbWeather";
+            this.lbWeather.Size = new System.Drawing.Size(23, 24);
+            this.lbWeather.TabIndex = 11;
+            this.lbWeather.Text = "-";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveBorder;
+            this.label6.Location = new System.Drawing.Point(895, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 240);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|\r\n|";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label5.Location = new System.Drawing.Point(918, 114);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(100, 19);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "最高気温：";
+            // 
+            // lbTempMax
+            // 
+            this.lbTempMax.AutoSize = true;
+            this.lbTempMax.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbTempMax.Location = new System.Drawing.Point(1024, 114);
+            this.lbTempMax.Name = "lbTempMax";
+            this.lbTempMax.Size = new System.Drawing.Size(20, 19);
+            this.lbTempMax.TabIndex = 11;
+            this.lbTempMax.Text = "-";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label8.Location = new System.Drawing.Point(918, 153);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(100, 19);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "最低気温：";
+            // 
+            // lbTempMin
+            // 
+            this.lbTempMin.AutoSize = true;
+            this.lbTempMin.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.lbTempMin.Location = new System.Drawing.Point(1024, 153);
+            this.lbTempMin.Name = "lbTempMin";
+            this.lbTempMin.Size = new System.Drawing.Size(20, 19);
+            this.lbTempMin.TabIndex = 11;
+            this.lbTempMin.Text = "-";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1185, 524);
             this.Controls.Add(this.tbWeatherInfo);
-            this.Controls.Add(this.pictureBox3);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pbWeatherImage);
             this.Controls.Add(this.lbOkinawa);
             this.Controls.Add(this.label4);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lbWeather);
+            this.Controls.Add(this.lbTempMin);
+            this.Controls.Add(this.lbTempMax);
             this.Controls.Add(this.lbPublishingOffice);
             this.Controls.Add(this.lbAreaName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbReportDatetime);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbHokkaido);
@@ -434,16 +478,14 @@ namespace WeatherApp {
             this.Controls.Add(this.cbChugokuShikoku);
             this.Controls.Add(this.cbTyubu);
             this.Controls.Add(this.cbKinki);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbOkinawa);
             this.Controls.Add(this.cbKanto);
             this.Controls.Add(this.cbHokkaido);
             this.Controls.Add(this.cbTohoku);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "天気予報アプリ";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbWeatherImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -468,7 +510,7 @@ namespace WeatherApp {
         private System.Windows.Forms.ComboBox cbHokkaido;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lbOkinawa;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbOkinawa;
         private System.Windows.Forms.PictureBox pbWeatherImage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -479,8 +521,12 @@ namespace WeatherApp {
         private System.Windows.Forms.Label lbPubli;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbWeatherInfo;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.Label lbWeather;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbTempMax;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lbTempMin;
     }
 }
 
