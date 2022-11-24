@@ -294,22 +294,17 @@ namespace WeatherApp {
             var wc = new WebClient() {
                 Encoding = Encoding.UTF8
             };
-            
             if (areacode <= 99999) {
                 var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/0{areacode}.json");
-                //var wString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/forecast/0{areacode}.json");
-                //pbWeatherImage.Image = loadImageFromURL($"https://www.jma.go.jp/bosai/forecast/img/{JsonConvert.DeserializeObject<Area4>(wString).weatherCodes}.svg");
                 WeatherDataD(dString);
-                //WeatherDataW(wString);
             } else {
                 var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/{areacode}.json");
-                //var wString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/forecast/{areacode}.json");
-                //pbWeatherImage.Image = loadImageFromURL ($"https://www.jma.go.jp/bosai/forecast/img/{JsonConvert.DeserializeObject<Area4>(wString).weatherCodes}.svg");
+                var dJson = JsonConvert.DeserializeObject<Rootobject>(dString);
                 WeatherDataD(dString);
-                //WeatherDataW(wString);
             }
             
         }
+
         
 
         public void WeatherDataD(string dString) {
@@ -317,13 +312,20 @@ namespace WeatherApp {
             lbPublishingOffice.Text = dJson.publishingOffice;
             lbReportDatetime.Text = dJson.reportDatetime.ToString();
             tbWeatherInfo.Text = dJson.text;
+
+            if (tbWeatherInfo.Text.Contains("晴れ")) {
+                lbWeather.Text = "晴れ";
+            }
+            if (tbWeatherInfo.Text.Contains("曇り")) {
+                lbWeather.Text = "曇り";
+            }
+            if (tbWeatherInfo.Text.Contains("雨")) {
+                lbWeather.Text = "雨";
+            }
+            if (tbWeatherInfo.Text.Contains("雪")) {
+                lbWeather.Text = "雪";
+            }
         }
-        public void WeatherDataW(string wString) {
-            var wJson = JsonConvert.DeserializeObject<Area4>(wString);
-
-
-
-        }
-
+        
     }
 }

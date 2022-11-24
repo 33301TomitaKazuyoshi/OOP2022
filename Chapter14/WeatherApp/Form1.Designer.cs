@@ -71,7 +71,7 @@ namespace WeatherApp {
             "宮城県",
             "山形県",
             "福島県"});
-            this.cbTohoku.Location = new System.Drawing.Point(381, 218);
+            this.cbTohoku.Location = new System.Drawing.Point(383, 227);
             this.cbTohoku.Name = "cbTohoku";
             this.cbTohoku.Size = new System.Drawing.Size(94, 20);
             this.cbTohoku.TabIndex = 10;
@@ -88,7 +88,7 @@ namespace WeatherApp {
             "千葉県",
             "東京都",
             "神奈川県"});
-            this.cbKanto.Location = new System.Drawing.Point(365, 301);
+            this.cbKanto.Location = new System.Drawing.Point(367, 331);
             this.cbKanto.Name = "cbKanto";
             this.cbKanto.Size = new System.Drawing.Size(90, 20);
             this.cbKanto.TabIndex = 10;
@@ -105,7 +105,7 @@ namespace WeatherApp {
             "兵庫県",
             "奈良県",
             "和歌山県"});
-            this.cbKinki.Location = new System.Drawing.Point(229, 368);
+            this.cbKinki.Location = new System.Drawing.Point(251, 411);
             this.cbKinki.Name = "cbKinki";
             this.cbKinki.Size = new System.Drawing.Size(88, 20);
             this.cbKinki.TabIndex = 10;
@@ -124,7 +124,7 @@ namespace WeatherApp {
             "富山県",
             "石川県",
             "福井県"});
-            this.cbTyubu.Location = new System.Drawing.Point(268, 320);
+            this.cbTyubu.Location = new System.Drawing.Point(282, 354);
             this.cbTyubu.Name = "cbTyubu";
             this.cbTyubu.Size = new System.Drawing.Size(91, 20);
             this.cbTyubu.TabIndex = 10;
@@ -143,7 +143,7 @@ namespace WeatherApp {
             "愛媛県",
             "高知県",
             "山口県"});
-            this.cbChugokuShikoku.Location = new System.Drawing.Point(114, 383);
+            this.cbChugokuShikoku.Location = new System.Drawing.Point(136, 430);
             this.cbChugokuShikoku.Name = "cbChugokuShikoku";
             this.cbChugokuShikoku.Size = new System.Drawing.Size(98, 20);
             this.cbChugokuShikoku.TabIndex = 10;
@@ -160,7 +160,7 @@ namespace WeatherApp {
             "大分県",
             "宮崎県",
             "鹿児島県"});
-            this.cbKyushu.Location = new System.Drawing.Point(34, 415);
+            this.cbKyushu.Location = new System.Drawing.Point(57, 485);
             this.cbKyushu.Name = "cbKyushu";
             this.cbKyushu.Size = new System.Drawing.Size(93, 20);
             this.cbKyushu.TabIndex = 10;
@@ -170,7 +170,7 @@ namespace WeatherApp {
             // 
             this.lbKyushu.AutoSize = true;
             this.lbKyushu.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbKyushu.Location = new System.Drawing.Point(46, 393);
+            this.lbKyushu.Location = new System.Drawing.Point(53, 463);
             this.lbKyushu.Name = "lbKyushu";
             this.lbKyushu.Size = new System.Drawing.Size(49, 19);
             this.lbKyushu.TabIndex = 11;
@@ -180,7 +180,7 @@ namespace WeatherApp {
             // 
             this.lbChugokuShikoku.AutoSize = true;
             this.lbChugokuShikoku.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbChugokuShikoku.Location = new System.Drawing.Point(99, 361);
+            this.lbChugokuShikoku.Location = new System.Drawing.Point(132, 408);
             this.lbChugokuShikoku.Name = "lbChugokuShikoku";
             this.lbChugokuShikoku.Size = new System.Drawing.Size(100, 19);
             this.lbChugokuShikoku.TabIndex = 11;
@@ -190,7 +190,7 @@ namespace WeatherApp {
             // 
             this.lbKinki.AutoSize = true;
             this.lbKinki.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbKinki.Location = new System.Drawing.Point(225, 346);
+            this.lbKinki.Location = new System.Drawing.Point(247, 389);
             this.lbKinki.Name = "lbKinki";
             this.lbKinki.Size = new System.Drawing.Size(49, 19);
             this.lbKinki.TabIndex = 11;
@@ -200,7 +200,7 @@ namespace WeatherApp {
             // 
             this.lbTyubu.AutoSize = true;
             this.lbTyubu.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbTyubu.Location = new System.Drawing.Point(281, 298);
+            this.lbTyubu.Location = new System.Drawing.Point(278, 332);
             this.lbTyubu.Name = "lbTyubu";
             this.lbTyubu.Size = new System.Drawing.Size(49, 19);
             this.lbTyubu.TabIndex = 11;
@@ -210,7 +210,7 @@ namespace WeatherApp {
             // 
             this.lbKanto.AutoSize = true;
             this.lbKanto.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbKanto.Location = new System.Drawing.Point(361, 279);
+            this.lbKanto.Location = new System.Drawing.Point(374, 309);
             this.lbKanto.Name = "lbKanto";
             this.lbKanto.Size = new System.Drawing.Size(49, 19);
             this.lbKanto.TabIndex = 11;
@@ -220,7 +220,7 @@ namespace WeatherApp {
             // 
             this.lbTohoku.AutoSize = true;
             this.lbTohoku.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbTohoku.Location = new System.Drawing.Point(377, 196);
+            this.lbTohoku.Location = new System.Drawing.Point(379, 195);
             this.lbTohoku.Name = "lbTohoku";
             this.lbTohoku.Size = new System.Drawing.Size(49, 19);
             this.lbTohoku.TabIndex = 11;
@@ -246,7 +246,7 @@ namespace WeatherApp {
             "胆振・日高地方",
             "石狩・空知・後志地方",
             "渡島・檜山地方"});
-            this.cbHokkaido.Location = new System.Drawing.Point(410, 90);
+            this.cbHokkaido.Location = new System.Drawing.Point(432, 109);
             this.cbHokkaido.Name = "cbHokkaido";
             this.cbHokkaido.Size = new System.Drawing.Size(142, 20);
             this.cbHokkaido.TabIndex = 10;
@@ -256,7 +256,7 @@ namespace WeatherApp {
             // 
             this.lbOkinawa.AutoSize = true;
             this.lbOkinawa.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbOkinawa.Location = new System.Drawing.Point(406, 412);
+            this.lbOkinawa.Location = new System.Drawing.Point(428, 431);
             this.lbOkinawa.Name = "lbOkinawa";
             this.lbOkinawa.Size = new System.Drawing.Size(49, 19);
             this.lbOkinawa.TabIndex = 11;
@@ -270,7 +270,7 @@ namespace WeatherApp {
             "大東島地方",
             "宮古島地方",
             "八重山地方"});
-            this.cbOkinawa.Location = new System.Drawing.Point(400, 434);
+            this.cbOkinawa.Location = new System.Drawing.Point(422, 453);
             this.cbOkinawa.Name = "cbOkinawa";
             this.cbOkinawa.Size = new System.Drawing.Size(108, 20);
             this.cbOkinawa.TabIndex = 10;
@@ -280,7 +280,7 @@ namespace WeatherApp {
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(631, 463);
+            this.label1.Location = new System.Drawing.Point(684, 527);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 19);
             this.label1.TabIndex = 11;
@@ -290,7 +290,7 @@ namespace WeatherApp {
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(631, 493);
+            this.label2.Location = new System.Drawing.Point(684, 557);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(100, 19);
             this.label2.TabIndex = 11;
@@ -310,7 +310,7 @@ namespace WeatherApp {
             // 
             this.lbPublishingOffice.AutoSize = true;
             this.lbPublishingOffice.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbPublishingOffice.Location = new System.Drawing.Point(717, 463);
+            this.lbPublishingOffice.Location = new System.Drawing.Point(770, 527);
             this.lbPublishingOffice.Name = "lbPublishingOffice";
             this.lbPublishingOffice.Size = new System.Drawing.Size(20, 19);
             this.lbPublishingOffice.TabIndex = 11;
@@ -330,7 +330,7 @@ namespace WeatherApp {
             // 
             this.lbReportDatetime.AutoSize = true;
             this.lbReportDatetime.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.lbReportDatetime.Location = new System.Drawing.Point(737, 493);
+            this.lbReportDatetime.Location = new System.Drawing.Point(790, 557);
             this.lbReportDatetime.Name = "lbReportDatetime";
             this.lbReportDatetime.Size = new System.Drawing.Size(20, 19);
             this.lbReportDatetime.TabIndex = 11;
@@ -350,7 +350,7 @@ namespace WeatherApp {
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("MS UI Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label4.Location = new System.Drawing.Point(633, 317);
+            this.label4.Location = new System.Drawing.Point(633, 332);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 19);
             this.label4.TabIndex = 11;
@@ -358,10 +358,10 @@ namespace WeatherApp {
             // 
             // tbWeatherInfo
             // 
-            this.tbWeatherInfo.Location = new System.Drawing.Point(688, 313);
+            this.tbWeatherInfo.Location = new System.Drawing.Point(687, 309);
             this.tbWeatherInfo.Multiline = true;
             this.tbWeatherInfo.Name = "tbWeatherInfo";
-            this.tbWeatherInfo.Size = new System.Drawing.Size(485, 140);
+            this.tbWeatherInfo.Size = new System.Drawing.Size(486, 215);
             this.tbWeatherInfo.TabIndex = 13;
             // 
             // pbWeatherImage
@@ -378,9 +378,9 @@ namespace WeatherApp {
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.pictureBox1.Image = global::WeatherApp.Properties.Resources.Japan2;
-            this.pictureBox1.Location = new System.Drawing.Point(11, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(9, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(604, 500);
+            this.pictureBox1.Size = new System.Drawing.Size(616, 560);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
@@ -450,7 +450,7 @@ namespace WeatherApp {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1185, 524);
+            this.ClientSize = new System.Drawing.Size(1185, 584);
             this.Controls.Add(this.tbWeatherInfo);
             this.Controls.Add(this.pbWeatherImage);
             this.Controls.Add(this.lbOkinawa);
