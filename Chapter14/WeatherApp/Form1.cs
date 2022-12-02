@@ -294,38 +294,38 @@ namespace WeatherApp {
             var wc = new WebClient() {
                 Encoding = Encoding.UTF8
             };
-            if (areacode <= 99999) {
-                var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/0{areacode}.json");
-                WeatherDataD(dString);
-            } else {
-                var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/{areacode}.json");
-                var dJson = JsonConvert.DeserializeObject<Rootobject>(dString);
-                WeatherDataD(dString);
-            }
+            try {
+                if (areacode <= 99999) {
+                    var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/0{areacode}.json");
+                    var wString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/forecast/0{areacode}.json");
+                    WeatherDataD(dString,wString);
+                } else {
+                    var dString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/overview_forecast/{areacode}.json");
+                    var wString = wc.DownloadString($"https://www.jma.go.jp/bosai/forecast/data/forecast/{areacode}.json");
+                    WeatherDataD(dString,wString);
+                }
+            } catch { }
             
         }
 
         
 
-        public void WeatherDataD(string dString) {
+        public void WeatherDataD(string dString,string wString) {
             var dJson = JsonConvert.DeserializeObject<Rootobject>(dString);
             lbPublishingOffice.Text = dJson.publishingOffice;
             lbReportDatetime.Text = dJson.reportDatetime.ToString();
             tbWeatherInfo.Text = dJson.text;
 
-            if (tbWeatherInfo.Text.Contains("晴れ")) {
-                lbWeather.Text = "晴れ";
-            }
-            if (tbWeatherInfo.Text.Contains("曇り")) {
-                lbWeather.Text = "曇り";
-            }
-            if (tbWeatherInfo.Text.Contains("雨")) {
-                lbWeather.Text = "雨";
-            }
-            if (tbWeatherInfo.Text.Contains("雪")) {
-                lbWeather.Text = "雪";
+            var wJson = JsonConvert.DeserializeObject<Class1[]>(wString);
+
+            var jsonPic = wJson[0].timeSeries[0].areas[1].weatherCodes[0];
+            var jsonPic2 = wJson[0].timeSeries[0].areas[1].weatherCodes[1];
+            var jsonPicWeather = wJson[0].timeSeries[0].areas[1].weathers[0];
+            lbWeather.Text = jsonPicWeather.ToString();
+            pbWeatherImage1.ImageLocation = $"https://www.jma.go.jp/bosai/forecast/img/{jsonPic}.png";
+            if (pbWeatherImage1.ImageLocation == null) {
+                pbWeatherImage1.ImageLocation = $"https://www.jma.go.jp/bosai/forecast/img/{jsonPic2}.png";
             }
         }
-        
     }
 }
